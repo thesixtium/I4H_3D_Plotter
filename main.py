@@ -6,11 +6,12 @@ import matplotlib.pyplot as plt
 import numpy
 import time
 
+
 def clean_data(data):
     clean_t_xyz = [[]]
 
     for i in range(1, len(data)):
-        if i != (len(data)-1):
+        if i != (len(data) - 1):
             clean_t_xyz.append(data[i])
             x = (data[i][0] + data[i + 1][0]) / 2
             y = (data[i][1] + data[i + 1][1]) / 2
@@ -19,6 +20,7 @@ def clean_data(data):
         else:
             clean_t_xyz.append(data[i])
     return clean_t_xyz
+
 
 def magnitude(data):
     magnitude_data = []
@@ -31,6 +33,7 @@ def magnitude(data):
         magnitude_data.append(math.sqrt(m2))
 
     return magnitude_data
+
 
 if __name__ == '__main__':
     # make sure the 'COM#' is set according the Windows Device Manager
@@ -99,7 +102,7 @@ if __name__ == '__main__':
     # ax3.set_xlim(mag_xlim)
 
     ax4 = fig.add_subplot(2, 2, 4)
-    ax4.title.set_text('|IMU XYZ|')
+    ax4.title.set_text('Touchscreen XY')
     # ax4.set_xlim(mag_xlim)
 
     '''
@@ -112,12 +115,15 @@ if __name__ == '__main__':
     t_x = []
     t_y = []
     t_z = []
-    t_m = []
 
     i_x = []
     i_y = []
     i_z = []
+
+    t_m = []
     i_m = []
+
+    t_cb = []
 
     time = []
 
@@ -129,16 +135,17 @@ if __name__ == '__main__':
         t_x.append(t_xyz[i][0])
         t_y.append(t_xyz[i][1])
         t_z.append(t_xyz[i][2])
-        t_m.append(t_mag[i])
 
         i_x.append(i_xyz[i][0])
         i_y.append(i_xyz[i][1])
         i_z.append(i_xyz[i][2])
+
+        t_m.append(t_mag[i])
         i_m.append(i_mag[i])
 
         time.append(i)
 
-        ax1.plot(numpy.array(t_x ),
+        ax1.plot(numpy.array(t_x),
                  numpy.array(t_y),
                  numpy.array(t_z))
         ax2.plot(numpy.array(i_x),
@@ -146,8 +153,8 @@ if __name__ == '__main__':
                  numpy.array(i_z))
         ax3.plot(numpy.array(time),
                  numpy.array(t_m))
-        ax4.plot(numpy.array(time),
-                 numpy.array(i_m))
+        ax4.plot(numpy.array(t_x),
+                 numpy.array(t_y))
         fig.canvas.flush_events()
         plt.draw()
 
